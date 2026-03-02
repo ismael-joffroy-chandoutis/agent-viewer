@@ -1366,6 +1366,9 @@ header .status-bar .dot {
       </div>
     </div>
     <div class="modal-actions">
+      <label style="display:flex;align-items:center;gap:8px;color:var(--dim);font-size:11px;letter-spacing:1px;cursor:pointer">
+        <input type="checkbox" id="spawnNotify" style="accent-color:var(--amber)"> NOTIFY ON COMPLETE
+      </label>
       <button class="btn-cancel" onclick="closeSpawnModal()">CANCEL</button>
       <button class="btn-spawn" onclick="spawnAgent()">SPAWN</button>
     </div>
@@ -1521,6 +1524,9 @@ function renderCard(agent) {
 
   let metaLines = '';
   metaLines += `<div class="meta">PROJECT: <span>${escapeHtml(projectName)}</span></div>`;
+  if (agent.branch) {
+    metaLines += `<div class="meta">BRANCH: <span style="color:var(--amber)">${escapeHtml(agent.branch)}</span></div>`;
+  }
   metaLines += `<div class="meta">UPTIME: <span>${uptime}</span></div>`;
 
   if (agent.state === 'idle') {
@@ -1666,6 +1672,7 @@ function renderCard(agent) {
 async function spawnAgent() {
   const projectPath = document.getElementById('spawnProject').value.trim();
   const prompt = document.getElementById('spawnPrompt').value.trim();
+  const notifyOnComplete = document.getElementById('spawnNotify').checked;
 
   if (!projectPath || !prompt) {
     alert('Project path and prompt are required');
@@ -1676,7 +1683,7 @@ async function spawnAgent() {
     const res = await fetch('/api/agents', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ projectPath, prompt }),
+      body: JSON.stringify({ projectPath, prompt, notifyOnComplete }),
     });
     const data = await res.json();
     if (data.error) {

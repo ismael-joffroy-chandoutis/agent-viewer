@@ -1,5 +1,5 @@
 const express = require('express');
-const { execSync, exec } = require('child_process');
+const { execSync, exec, execFile, execFileSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -117,6 +117,24 @@ async function refreshDiscoveredLabel(sessionName) {
     console.log(`[LABEL] Failed for ${sessionName}: ${e.message}`);
     reg.labelRefreshed = false; // Allow retry
   }
+}
+
+// ─── Git Helpers ─────────────────────────────────────────────────────────────
+
+function detectGitBranch(projectPath) {
+  if (!projectPath) return null;
+  try {
+    return execFileSync('git', ['-C', projectPath, 'rev-parse', '--abbrev-ref', 'HEAD'], {
+      encoding: 'utf-8', timeout: 3000, stdio: ['ignore', 'pipe', 'ignore']
+    }).trim() || null;
+  } catch {
+    return null;
+  }
+}
+
+function notifyAgent(label) {
+  const script = path.join(os.homedir(), '.claude/scripts/notify.sh');
+  execFile(script, [`Agent terminé : ${label}`, '0', 'gamelan'], () => {});
 }
 
 // ─── ANSI Stripping ──────────────────────────────────────────────────────────
@@ -307,7 +325,7 @@ async function waitForClaudeReady(sessionName, timeoutMs = 30000) {
   return false;
 }
 
-async function spawnAgent(projectPath, prompt) {
+async function spawnAgent(projectPath, prompt, opts = {}) {
   // Expand ~ to home directory
   if (projectPath.startsWith('~')) {
     projectPath = path.join(os.homedir(), projectPath.slice(1));
@@ -356,6 +374,8 @@ async function spawnAgent(projectPath, prompt) {
     createdAt: Date.now(),
     state: 'running',
     initialPromptSent: false,
+    branch: detectGitBranch(projectPath),
+    notifyOnComplete: opts.notifyOnComplete || false,
   };
   saveRegistry();
 
@@ -617,6 +637,9 @@ function buildAgentInfo(sessionName, sessionsCache) {
         // Session might already be dead
       }
       registry[sessionName].completedAt = registry[sessionName].completedAt || Date.now();
+      if (registry[sessionName].notifyOnComplete) {
+        notifyAgent(registry[sessionName].label || sessionName);
+      }
     }
     registry[sessionName].state = state;
     if (state === 'idle' && !registry[sessionName].idleSince) {
@@ -642,6 +665,8 @@ function buildAgentInfo(sessionName, sessionsCache) {
     completedAt: reg.completedAt || null,
     lastActivity: state !== 'completed' ? getLastActivity(sessionName) : '',
     discovered: reg.discovered || false,
+    branch: reg.branch || null,
+    notifyOnComplete: reg.notifyOnComplete || false,
   };
 }
 
@@ -663,13 +688,15 @@ function getAllAgents() {
     if (!panePid) continue;
 
     if (hasClaudeDescendant(panePid, processTree)) {
+      const discoveredPath = getPaneCurrentPath(session.name);
       registry[session.name] = {
         label: session.name,
-        projectPath: getPaneCurrentPath(session.name),
+        projectPath: discoveredPath,
         prompt: '',
         createdAt: session.created,
         state: 'running',
         discovered: true,
+        branch: detectGitBranch(discoveredPath),
       };
       // Async: generate a smart label from pane output
       refreshDiscoveredLabel(session.name);
@@ -736,11 +763,11 @@ app.get('/api/agents', (req, res) => {
 
 app.post('/api/agents', async (req, res) => {
   try {
-    const { projectPath, prompt } = req.body;
+    const { projectPath, prompt, notifyOnComplete } = req.body;
     if (!projectPath || !prompt) {
       return res.status(400).json({ error: 'projectPath and prompt are required' });
     }
-    const name = await spawnAgent(projectPath, prompt);
+    const name = await spawnAgent(projectPath, prompt, { notifyOnComplete: !!notifyOnComplete });
     res.json({ name, status: 'spawned' });
   } catch (e) {
     res.status(500).json({ error: e.message });
