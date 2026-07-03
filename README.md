@@ -100,3 +100,5 @@ http://<machine-name>:4200
 - **Attach** — Click `ATTACH` to copy the `tmux attach` command for direct terminal access.
 - **Git branch detection** — Each card automatically shows the current git branch of the agent's working directory.
 - **Notify on complete** — Check "NOTIFY ON COMPLETE" when spawning to trigger a system notification when the agent finishes (requires `~/.claude/scripts/notify.sh`).
+
+By [Ismaël Joffroy Chandoutis](https://ismaeljoffroychandoutis.com).
