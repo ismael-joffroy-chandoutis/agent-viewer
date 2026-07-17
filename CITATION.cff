@@ -6,7 +6,7 @@ type: dataset
 authors:
   - given-names: "Ismaël"
     family-names: "Joffroy Chandoutis"
-    website: "https://github.com/12georgiadis"
-repository-code: "https://github.com/12georgiadis/agent-viewer"
-url: "https://github.com/12georgiadis/agent-viewer"
+    website: "https://github.com/ismael-joffroy-chandoutis"
+repository-code: "https://github.com/ismael-joffroy-chandoutis/agent-viewer"
+url: "https://github.com/ismael-joffroy-chandoutis/agent-viewer"
 license: CC-BY-NC-ND-4.0

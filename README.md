@@ -1,3 +1,5 @@
+**English** · [Français](README.fr.md)
+
 # Agent Viewer
 
 A kanban board for managing multiple Claude Code agents running in tmux sessions. Spawn, monitor, and interact with agents from a single web UI.
