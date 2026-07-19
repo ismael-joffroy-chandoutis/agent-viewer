@@ -94,19 +94,19 @@ http://<machine-name>:4200
 
 ## Fonctionnalités
 
-- **Lancer des agents** — Cliquez sur `[+ SPAWN]` ou appuyez sur `N`, saisissez un chemin de projet et un prompt. Chaque agent est lancé dans sa propre session tmux exécutant `claude`.
-- **Colonnes kanban** — Les agents sont triés dans les colonnes Running, Idle et Completed selon leur état.
-- **Auto-découverte** — Les sessions tmux existantes exécutant Claude sont automatiquement détectées et ajoutées au tableau.
-- **Sortie en direct** — Cliquez sur `VIEW OUTPUT` pour voir la sortie terminal complète avec rendu des couleurs ANSI.
-- **Envoi de messages** — Tapez dans le champ prompt de n'importe quelle carte et appuyez sur `Ctrl+Enter` pour envoyer des messages de suivi à un agent.
-- **Envoi de fichiers** — Glissez-déposez des fichiers sur une carte ou cliquez sur `FILE` pour envoyer des fichiers à un agent.
-- **Relance** — Les agents terminés (Completed) peuvent être relancés avec un nouveau prompt depuis le même répertoire de projet.
-- **Attach** — Cliquez sur `ATTACH` pour copier la commande `tmux attach` et accéder directement au terminal.
-- **Détection de branche git** — Chaque carte affiche automatiquement la branche git courante du répertoire de travail de l'agent.
-- **Notification à la fin** — Cochez « NOTIFY ON COMPLETE » lors du lancement pour déclencher une notification système quand l'agent termine (nécessite `~/.claude/scripts/notify.sh`).
-- **Invites interactives** — Quand un agent s'arrête sur une approbation de plan ou un menu numéroté, la carte le détecte, affiche un badge `PLAN APPROVAL` ou `SELECT` et fait apparaître les contrôles `↑ ↓ ENTER ESC` pour naviguer et répondre sans avoir à s'attacher au terminal.
-- **Retour sur le plan** — Sur une invite d'approbation de plan, saisissez directement dans le champ de message pour router votre texte vers l'option « dire à Claude quoi changer » au lieu d'approuver tel quel.
-- **Stop** — Cliquez sur `STOP` pour interrompre un agent en cours d'exécution.
+- **Lancer des agents**: Cliquez sur `[+ SPAWN]` ou appuyez sur `N`, saisissez un chemin de projet et un prompt. Chaque agent est lancé dans sa propre session tmux exécutant `claude`.
+- **Colonnes kanban**: Les agents sont triés dans les colonnes Running, Idle et Completed selon leur état.
+- **Auto-découverte**: Les sessions tmux existantes exécutant Claude sont automatiquement détectées et ajoutées au tableau.
+- **Sortie en direct**: Cliquez sur `VIEW OUTPUT` pour voir la sortie terminal complète avec rendu des couleurs ANSI.
+- **Envoi de messages**: Tapez dans le champ prompt de n'importe quelle carte et appuyez sur `Ctrl+Enter` pour envoyer des messages de suivi à un agent.
+- **Envoi de fichiers**: Glissez-déposez des fichiers sur une carte ou cliquez sur `FILE` pour envoyer des fichiers à un agent.
+- **Relance**: Les agents terminés (Completed) peuvent être relancés avec un nouveau prompt depuis le même répertoire de projet.
+- **Attach**: Cliquez sur `ATTACH` pour copier la commande `tmux attach` et accéder directement au terminal.
+- **Détection de branche git**: Chaque carte affiche automatiquement la branche git courante du répertoire de travail de l'agent.
+- **Notification à la fin**: Cochez « NOTIFY ON COMPLETE » lors du lancement pour déclencher une notification système quand l'agent termine (nécessite `~/.claude/scripts/notify.sh`).
+- **Invites interactives**: Quand un agent s'arrête sur une approbation de plan ou un menu numéroté, la carte le détecte, affiche un badge `PLAN APPROVAL` ou `SELECT` et fait apparaître les contrôles `↑ ↓ ENTER ESC` pour naviguer et répondre sans avoir à s'attacher au terminal.
+- **Retour sur le plan**: Sur une invite d'approbation de plan, saisissez directement dans le champ de message pour router votre texte vers l'option « dire à Claude quoi changer » au lieu d'approuver tel quel.
+- **Stop**: Cliquez sur `STOP` pour interrompre un agent en cours d'exécution.
 
 ### Invites interactives
 

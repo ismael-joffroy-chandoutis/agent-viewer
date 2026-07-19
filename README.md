@@ -94,19 +94,19 @@ http://<machine-name>:4200
 
 ## Features
 
-- **Spawn agents** — Click `[+ SPAWN]` or press `N`, enter a project path and prompt. Each agent launches in its own tmux session running `claude`.
-- **Kanban columns** — Agents are sorted into Running, Idle, and Completed columns based on their state.
-- **Auto-discovery** — Existing tmux sessions running Claude are automatically detected and added to the board.
-- **Live output** — Click `VIEW OUTPUT` to see the full terminal output with ANSI color rendering.
-- **Send messages** — Type in the prompt field on any card and press `Ctrl+Enter` to send follow-up messages to an agent.
-- **File uploads** — Drag and drop files onto a card or click `FILE` to send files to an agent.
-- **Re-spawn** — Completed agents can be re-spawned with a new prompt from the same project directory.
-- **Attach** — Click `ATTACH` to copy the `tmux attach` command for direct terminal access.
-- **Git branch detection** — Each card automatically shows the current git branch of the agent's working directory.
-- **Notify on complete** — Check "NOTIFY ON COMPLETE" when spawning to trigger a system notification when the agent finishes (requires `~/.claude/scripts/notify.sh`).
-- **Interactive prompts** — When an agent pauses on a plan approval or a numbered select menu, the card detects it, shows a `PLAN APPROVAL` or `SELECT` badge, and surfaces `↑ ↓ ENTER ESC` controls so you can navigate and answer without attaching to the terminal.
-- **Plan feedback** — On a plan-approval prompt, type directly into the message field to route your text to Claude's "tell Claude what to change" option instead of approving as-is.
-- **Stop** — Click `STOP` to interrupt a running agent.
+- **Spawn agents**: Click `[+ SPAWN]` or press `N`, enter a project path and prompt. Each agent launches in its own tmux session running `claude`.
+- **Kanban columns**: Agents are sorted into Running, Idle, and Completed columns based on their state.
+- **Auto-discovery**: Existing tmux sessions running Claude are automatically detected and added to the board.
+- **Live output**: Click `VIEW OUTPUT` to see the full terminal output with ANSI color rendering.
+- **Send messages**: Type in the prompt field on any card and press `Ctrl+Enter` to send follow-up messages to an agent.
+- **File uploads**: Drag and drop files onto a card or click `FILE` to send files to an agent.
+- **Re-spawn**: Completed agents can be re-spawned with a new prompt from the same project directory.
+- **Attach**: Click `ATTACH` to copy the `tmux attach` command for direct terminal access.
+- **Git branch detection**: Each card automatically shows the current git branch of the agent's working directory.
+- **Notify on complete**: Check "NOTIFY ON COMPLETE" when spawning to trigger a system notification when the agent finishes (requires `~/.claude/scripts/notify.sh`).
+- **Interactive prompts**: When an agent pauses on a plan approval or a numbered select menu, the card detects it, shows a `PLAN APPROVAL` or `SELECT` badge, and surfaces `↑ ↓ ENTER ESC` controls so you can navigate and answer without attaching to the terminal.
+- **Plan feedback**: On a plan-approval prompt, type directly into the message field to route your text to Claude's "tell Claude what to change" option instead of approving as-is.
+- **Stop**: Click `STOP` to interrupt a running agent.
 
 ### Interactive prompts
 

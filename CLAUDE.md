@@ -19,14 +19,14 @@ There is no build step, no test suite, and no linter configured. The app runs di
 
 This is a two-file application with no frameworks or build tooling:
 
-- **`server.js`** — Express backend handling agent lifecycle, tmux integration, state detection, and SSE broadcasting
-- **`public/index.html`** — Entire frontend (HTML/CSS/JS) in a single file with vanilla JavaScript
+- **`server.js`**: Express backend handling agent lifecycle, tmux integration, state detection, and SSE broadcasting
+- **`public/index.html`**: Entire frontend (HTML/CSS/JS) in a single file with vanilla JavaScript
 
 ### Backend Core Systems (server.js)
 
 **Agent Registry**: In-memory object + `.agent-registry.json` persistence. Tracks agent label, project path, prompt, state, and timestamps. Auto-recovers on restart.
 
-**State Detection** (`detectAgentState()`): Polls tmux pane output every 3 seconds. Classifies agents as `running`, `idle`, or `completed` by pattern-matching Claude Code's terminal UI signals — "esc to interrupt" means running; empty prompts and permission requests mean idle.
+**State Detection** (`detectAgentState()`): Polls tmux pane output every 3 seconds. Classifies agents as `running`, `idle`, or `completed` by pattern-matching Claude Code's terminal UI signals: "esc to interrupt" means running; empty prompts and permission requests mean idle.
 
 **Interactive Prompt Detection** (`detectPromptType()`): Pattern-matches the recent pane text to classify an active prompt as `select`, `multiselect`, `permission`, `yesno`, or `plan`. The frontend uses this to render navigation controls (`↑ ↓ ENTER ESC`) on the card and route input to `/api/agents/:name/keys` or `/api/agents/:name/plan-feedback`.
 
@@ -34,7 +34,7 @@ This is a two-file application with no frameworks or build tooling:
 
 **Auto-Discovery**: Scans all tmux sessions, builds process trees to detect Claude descendants, and adds discovered sessions to the registry.
 
-**LLM Label Generation**: Spawns a quick heuristic label immediately, then asynchronously calls Claude Haiku via CLI to generate a smarter label. Non-blocking — UI updates via SSE when the upgraded label arrives.
+**LLM Label Generation**: Spawns a quick heuristic label immediately, then asynchronously calls Claude Haiku via CLI to generate a smarter label. Non-blocking, UI updates via SSE when the upgraded label arrives.
 
 **SSE Endpoint** (`GET /api/events`): Broadcasts full agent state to all connected clients at `POLL_INTERVAL` (3s default).
 
