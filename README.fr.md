@@ -104,5 +104,34 @@ http://<machine-name>:4200
 - **Attach** — Cliquez sur `ATTACH` pour copier la commande `tmux attach` et accéder directement au terminal.
 - **Détection de branche git** — Chaque carte affiche automatiquement la branche git courante du répertoire de travail de l'agent.
 - **Notification à la fin** — Cochez « NOTIFY ON COMPLETE » lors du lancement pour déclencher une notification système quand l'agent termine (nécessite `~/.claude/scripts/notify.sh`).
+- **Invites interactives** — Quand un agent s'arrête sur une approbation de plan ou un menu numéroté, la carte le détecte, affiche un badge `PLAN APPROVAL` ou `SELECT` et fait apparaître les contrôles `↑ ↓ ENTER ESC` pour naviguer et répondre sans avoir à s'attacher au terminal.
+- **Retour sur le plan** — Sur une invite d'approbation de plan, saisissez directement dans le champ de message pour router votre texte vers l'option « dire à Claude quoi changer » au lieu d'approuver tel quel.
+- **Stop** — Cliquez sur `STOP` pour interrompre un agent en cours d'exécution.
+
+### Invites interactives
+
+Quand un agent s'arrête pour poser une question, la carte reproduit l'invite et vous donne les touches pour y répondre.
+
+Une invite d'approbation de plan sur une carte, avec les contrôles de navigation `PLAN` :
+
+![Approbation de plan sur une carte](docs/screenshots/plan-card.png)
+
+Un menu numéroté affiché sur une carte, avec les contrôles `SELECT` :
+
+![Invite de sélection sur une carte](docs/screenshots/select-card.png)
+
+Les mêmes invites, vues en entier dans la visionneuse de sortie :
+
+![Approbation de plan dans la visionneuse de sortie](docs/screenshots/plan-output-viewer.png)
+
+![Invite de sélection dans la visionneuse de sortie](docs/screenshots/select-output-viewer.png)
+
+## Licence
+
+Sous licence Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0). Voir [LICENSE.md](LICENSE.md). Pour citer ce travail, voir [CITATION.cff](CITATION.cff) ou utiliser le bouton « Cite this repository » de GitHub.
+
+## Développement
+
+L'architecture, les systèmes internes et le fonctionnement sont documentés dans [CLAUDE.md](CLAUDE.md), qui guide aussi Claude Code lorsqu'il travaille dans ce dépôt.
 
 Par [Ismaël Joffroy Chandoutis](https://ismaeljoffroychandoutis.com).

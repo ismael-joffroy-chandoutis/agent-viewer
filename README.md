@@ -104,5 +104,34 @@ http://<machine-name>:4200
 - **Attach** — Click `ATTACH` to copy the `tmux attach` command for direct terminal access.
 - **Git branch detection** — Each card automatically shows the current git branch of the agent's working directory.
 - **Notify on complete** — Check "NOTIFY ON COMPLETE" when spawning to trigger a system notification when the agent finishes (requires `~/.claude/scripts/notify.sh`).
+- **Interactive prompts** — When an agent pauses on a plan approval or a numbered select menu, the card detects it, shows a `PLAN APPROVAL` or `SELECT` badge, and surfaces `↑ ↓ ENTER ESC` controls so you can navigate and answer without attaching to the terminal.
+- **Plan feedback** — On a plan-approval prompt, type directly into the message field to route your text to Claude's "tell Claude what to change" option instead of approving as-is.
+- **Stop** — Click `STOP` to interrupt a running agent.
+
+### Interactive prompts
+
+When an agent stops to ask a question, the card mirrors the prompt and gives you the keys to answer it.
+
+A plan-approval prompt on a card, with the `PLAN` navigation controls:
+
+![Plan approval on a card](docs/screenshots/plan-card.png)
+
+A numbered select menu surfaced on a card, with `SELECT` controls:
+
+![Select prompt on a card](docs/screenshots/select-card.png)
+
+The same prompts, seen in full inside the output viewer:
+
+![Plan approval in the output viewer](docs/screenshots/plan-output-viewer.png)
+
+![Select prompt in the output viewer](docs/screenshots/select-output-viewer.png)
+
+## License
+
+Licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0). See [LICENSE.md](LICENSE.md). To cite this work, see [CITATION.cff](CITATION.cff) or use GitHub's "Cite this repository" button.
+
+## Development
+
+Architecture, core systems, and internals are documented in [CLAUDE.md](CLAUDE.md), which also guides Claude Code when working in this repository.
 
 By [Ismaël Joffroy Chandoutis](https://ismaeljoffroychandoutis.com).

@@ -28,6 +28,8 @@ This is a two-file application with no frameworks or build tooling:
 
 **State Detection** (`detectAgentState()`): Polls tmux pane output every 3 seconds. Classifies agents as `running`, `idle`, or `completed` by pattern-matching Claude Code's terminal UI signals — "esc to interrupt" means running; empty prompts and permission requests mean idle.
 
+**Interactive Prompt Detection** (`detectPromptType()`): Pattern-matches the recent pane text to classify an active prompt as `select`, `multiselect`, `permission`, `yesno`, or `plan`. The frontend uses this to render navigation controls (`↑ ↓ ENTER ESC`) on the card and route input to `/api/agents/:name/keys` or `/api/agents/:name/plan-feedback`.
+
 **Tmux Integration**: Spawns agents via `tmux new-session`, captures output via `tmux capture-pane -e -p`, sends messages via `tmux send-keys`. All external commands have timeouts (5-15s).
 
 **Auto-Discovery**: Scans all tmux sessions, builds process trees to detect Claude descendants, and adds discovered sessions to the registry.
@@ -44,14 +46,18 @@ Three-column kanban board (Running/Idle/Completed) with SSE-driven updates. Incl
 
 | Method | Path | Purpose |
 |--------|------|---------|
+| GET | `/api/recent-projects` | List recently used project paths |
 | GET | `/api/agents` | List all agents with state |
 | POST | `/api/agents` | Spawn new agent |
 | POST | `/api/agents/:name/send` | Send message / respawn |
 | POST | `/api/agents/:name/upload` | Upload file to agent |
+| POST | `/api/agents/:name/keys` | Send a navigation key (Up/Down/Space/Enter/Escape/Tab) to an interactive prompt |
+| POST | `/api/agents/:name/plan-feedback` | Type feedback into a plan-approval prompt (auto-selects the "Type here" option) |
 | DELETE | `/api/agents/:name` | Kill agent session |
 | DELETE | `/api/agents/:name/cleanup` | Remove from registry |
 | DELETE | `/api/cleanup/completed` | Bulk cleanup completed |
 | GET | `/api/agents/:name/output` | Fetch terminal output |
+| GET | `/api/browse` | Browse directories for the project-path picker |
 | GET | `/api/events` | SSE real-time updates |
 
 ## Key Patterns
