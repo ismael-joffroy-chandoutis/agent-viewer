@@ -4,6 +4,8 @@
 
 A kanban board for managing multiple Claude Code agents running in tmux sessions. Spawn, monitor, and interact with agents from a single web UI.
 
+<img src="monde.jpg" alt="agent-viewer" width="100%">
+
 <img width="1466" height="725" alt="Screenshot 2026-02-09 at 14 54 21" src="https://github.com/user-attachments/assets/cd31b988-f649-4e92-9844-7a1ece9aa634" />
 
 Manage your agents from your mobile phone with Tailscale

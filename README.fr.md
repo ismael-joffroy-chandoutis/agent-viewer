@@ -4,6 +4,8 @@
 
 Un tableau kanban pour gérer plusieurs agents Claude Code tournant dans des sessions tmux. Lancez, surveillez et interagissez avec des agents depuis une seule interface web.
 
+<img src="monde.jpg" alt="agent-viewer" width="100%">
+
 <img width="1466" height="725" alt="Screenshot 2026-02-09 at 14 54 21" src="https://github.com/user-attachments/assets/cd31b988-f649-4e92-9844-7a1ece9aa634" />
 
 Gérez vos agents depuis votre téléphone avec Tailscale
